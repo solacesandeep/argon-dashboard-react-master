@@ -1,25 +1,36 @@
 
-// import {
-//   Badge,
-//   Card,
-//   CardHeader,
-//   CardFooter,
-//   DropdownMenu,
-//   DropdownItem,
-//   UncontrolledDropdown,
-//   DropdownToggle,
-//   Media,
-//   Pagination,
-//   PaginationItem,
-//   PaginationLink,
-//   Progress,
-//   Table,
-//   Container,
-//   Row,
-//   UncontrolledTooltip,
-// } from "reactstrap";
-// // core components
-// import Header from "components/Headers/Header.js";
+import {
+    Badge,
+    Card,
+    CardHeader,
+    CardFooter,
+    DropdownMenu,
+    DropdownItem,
+    UncontrolledDropdown,
+    DropdownToggle,
+    Media,
+    Pagination,
+    PaginationItem,
+    PaginationLink,
+    Progress,
+    Table,
+    Container,
+    Row,
+    UncontrolledTooltip,
+} from "reactstrap";
+// core components
+
+import Header from "components/Headers/Header.js";
+import React, { useState, useEffect, useContext } from 'react'
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import CreateIcon from '@mui/icons-material/Create';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { NavLink } from 'react-router-dom';
+import { adddata, deldata } from '../../components/context/ContentProvider'
+import { updatedata } from '../../components/context/ContentProvider'
+
+
+
 
 // const Tables = () => {
 //   return (
@@ -47,11 +58,11 @@
 //                   </tr>
 //                 </thead>
 //                 <tbody>
-               
-            
+
+
 //                   <tr>
-              
-                  
+
+
 //                     <td>
 //                       <div className="avatar-group">
 //                         <a
@@ -60,22 +71,22 @@
 //                           id="tooltip664029969"
 //                           onClick={(e) => e.preventDefault()}
 //                         >
-                      
+
 //                         </a>
-                       
+
 //                         <a
 //                           className="avatar avatar-sm"
 //                           href="#pablo"
 //                           id="tooltip806693074"
 //                           onClick={(e) => e.preventDefault()}
 //                         >
-                       
+
 //                         </a>
-                   
-                      
-                        
-                        
-                      
+
+
+
+
+
 //                         <a
 //                           className="avatar avatar-sm"
 //                           href="#pablo"
@@ -154,10 +165,10 @@
 //                     className="pagination justify-content-end mb-0"
 //                     listClassName="justify-content-end mb-0"
 //                   >
-               
-                  
-                  
-                   
+
+
+
+
 //                     <PaginationItem>
 //                       <PaginationLink
 //                         href="#pablo"
@@ -184,18 +195,18 @@
 //                 className="align-items-center table-dark table-flush"
 //                 responsive
 //               >
-               
+
 //                 <tbody>
 //                   <tr>
-                  
-                   
+
+
 //                     <td>
 //                       <div className="avatar-group">
-                    
-                     
-                          
-                       
-                      
+
+
+
+
+
 //                         <a
 //                           className="avatar avatar-sm"
 //                           href="#pablo"
@@ -240,36 +251,36 @@
 //                         </UncontrolledTooltip>
 //                       </div>
 //                     </td>
-              
-                  
+
+
 //                   </tr>
 //                   <tr>
-                  
-                 
+
+
 //                     <td>
 //                       <div className="avatar-group">
-                     
-                       
-                     
-                        
-                      
-                     
-                    
-                       
+
+
+
+
+
+
+
+
 //                       </div>
 //                     </td>
-                    
-                  
+
+
 //                   </tr>
 //                   <tr>
-                   
-                 
+
+
 //                     <td>
 //                       <div className="avatar-group">
-                  
-                 
-                       
-                    
+
+
+
+
 //                       </div>
 //                     </td>
 //                     <td>
@@ -284,10 +295,10 @@
 //                         </div>
 //                       </div>
 //                     </td>
-                  
+
 //                   </tr>
 //                   <tr>
-                  
+
 //                     <td>
 //                       <Badge color="" className="badge-dot">
 //                         <i className="bg-info" />
@@ -302,19 +313,19 @@
 //                           id="tooltip226319315"
 //                           onClick={(e) => e.preventDefault()}
 //                         >
-                         
+
 //                         </a>
-                       
-                  
-                      
-                        
+
+
+
+
 //                         <a
 //                           className="avatar avatar-sm"
 //                           href="#pablo"
 //                           id="tooltip638048561"
 //                           onClick={(e) => e.preventDefault()}
 //                         >
-                         
+
 //                         </a>
 //                         <UncontrolledTooltip
 //                           delay={0}
@@ -372,10 +383,10 @@
 //                     </td>
 //                   </tr>
 //                   <tr>
-                  
+
 //                     <td>
 //                       <div className="avatar-group">
-                       
+
 //                         <a
 //                           className="avatar avatar-sm"
 //                           href="#pablo"
@@ -397,12 +408,12 @@
 //                         >
 //                           Alexander Smith
 //                         </UncontrolledTooltip>
-                     
+
 //                       </div>
 //                     </td>
-                   
+
 //                     <td className="text-right">
-                   
+
 //                     </td>
 //                   </tr>
 //                 </tbody>
@@ -418,13 +429,13 @@
 // export default Tables;
 
 
-import React, { useState, useEffect, useContext } from 'react'
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import CreateIcon from '@mui/icons-material/Create';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import { NavLink } from 'react-router-dom';
-import { adddata, deldata } from '../../components/context/ContentProvider'
-import { updatedata } from '../../components/context/ContentProvider'
+// import React, { useState, useEffect, useContext } from 'react'
+// import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+// import CreateIcon from '@mui/icons-material/Create';
+// import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+// import { NavLink } from 'react-router-dom';
+// import { adddata, deldata } from '../../components/context/ContentProvider'
+// import { updatedata } from '../../components/context/ContentProvider'
 
 
 
@@ -436,9 +447,9 @@ const Tables = () => {
 
     const { udata, setUdata } = useContext(adddata);
 
-    const {updata, setUPdata} = useContext(updatedata);
+    const { updata, setUPdata } = useContext(updatedata);
 
-    const {dltdata, setDLTdata} = useContext(deldata);
+    const { dltdata, setDLTdata } = useContext(deldata);
 
     const getdata = async () => {
 
@@ -488,25 +499,48 @@ const Tables = () => {
 
     }
 
+    
+
 
     return (
 
         <>
+
+
+                
+
+            <Header />
+
+       
+       {/* {<div className="alert alert-warning alert-dismissible fade show" role="alert">
+<strong>Holy guacamole!</strong> You should check in on some of those fields below.
+<button type="button" className="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
+
+</div>} */}
+
+
             {
                 udata ?
                     <>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <div class="alert alert-warning alert-dismissible  show" role="alert">
                             <strong>{udata.name}</strong>  added succesfully!
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                           
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                     </> : ""
             }
             {
                 updata ?
                     <>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <div className="alert alert-success alert-dismissible fade show " role="alert">
                             <strong>{updata.name}</strong>  updated succesfully!
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close">close
+                            <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                     </> : ""
             }
@@ -514,20 +548,33 @@ const Tables = () => {
             {
                 dltdata ?
                     <>
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <div className="alert alert-danger alert-dismissible fade show " role="alert">
                             <strong>{dltdata.name}</strong>  deleted succesfully!
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                     </> : ""
             }
 
 
+            {/* <Header /> */}
+
             <div className="mt-5">
-                
+
                 <div className="container">
-                    {/* <div className="add_btn mt-2 mb-2">
-                        <NavLink to="/registeruser" className="btn btn-primary">Add data</NavLink>
-                    </div> */}
+
+
+
+
+
+
+
+
+
+
+
+
 
                     <table class="table">
                         <thead>
@@ -538,6 +585,7 @@ const Tables = () => {
                                 <th scope="col">Job</th>
                                 <th scope="col">Number</th>
                                 <th scope="col"></th>
+                              
                             </tr>
                         </thead>
                         <tbody>
@@ -547,7 +595,7 @@ const Tables = () => {
                                     return (
                                         <>
                                             <tr>
-                                                
+
                                                 <th scope="row">{id + 1}</th>
                                                 <td>{element.name}</td>
                                                 <td>{element.email}</td>
@@ -570,8 +618,8 @@ const Tables = () => {
 
                 </div>
                 <div className="add_btn mt-2 mb-2">
-                        <NavLink to="/registeruser" className="btn btn-primary">Add data</NavLink>
-                    </div>
+                    <NavLink to="/registeruser" className="btn btn-primary">Add data</NavLink>
+                </div>
             </div>
         </>
     )

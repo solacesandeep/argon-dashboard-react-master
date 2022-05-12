@@ -1,22 +1,4 @@
-/*!
 
-=========================================================
-* Argon Dashboard React - v1.2.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
-// reactstrap components
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { useHistory,useNavigate } from 'react-router-dom';
 import axios from 'axios'
@@ -36,6 +18,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import {   Alert } from "react-bootstrap";  //these line for jest
 
 const Login = () => {
 
@@ -43,10 +26,15 @@ const Login = () => {
 
 
 
-   // const Navigate  = useNavigate();
+  //  const Navigate  = useNavigate()
+
   //  const [username,setUsername]=useState('')
    const [email,setEmail]=useState('')
    const [password,setPassword]=useState('')
+
+// these two line for jest 
+   const [error, setError] = useState("");
+  const [showUser, setShowUser] = useState(false);
    
 
   // console.log({username, email,password});   
@@ -77,29 +65,69 @@ const handlePassword =(e)=>{
 
 const handleSubmit = (e)=>{
   // console.log({username,email,password});
+
+  // these are jest
+  setShowUser(false);
+    e.preventDefault();
+    if (validateEmail(email)) {
+      setShowUser(true);
+      setError("");
+      return;
+    }
+    
+  // yaha tk jest
+
+
   console.log({email,password});
     e.preventDefault()
+    // localStorage.setItem('user-info', JSON.stringify({
+    //   'msg':"success"
+    // }))
     console.log("submitted form")
-    axios.post('localhost:8080/api/login' , {
+    axios.post('localhost:8080/paste here /login' , {
         // username:username,
         email:email,
         password:password
     })
     .then((response)=>{
+      // localStorage.setItem('user-info',"login successfull") uncomment this after get api
         console.log(response.data );
         alert("success")
          
     })
     .catch((err )=> {
+      
         console.log(err)
         console.log(err.response)
-        alert("service error ")
+        // alert("service error ") uncomment this after
 
     })
-    // Navigate.push("Home/")
+    history.push("/admin/index")
+
 }
   return (
     <>
+
+
+
+
+      {/* ye part jest */}
+{showUser && (
+        <Alert data-testid="user" variant="success">
+          {email}
+        </Alert>
+      )}
+        {error && (
+        <Alert data-testid="error" variant="danger">
+          {error}
+        </Alert>
+      )}
+
+
+      {/* upr ki line jest */}
+
+
+      
       <Col lg="5" md="7">
         <Card className="bg-secondary shadow border-0">
           <CardHeader className="bg-transparent pb-5">
@@ -151,40 +179,27 @@ const handleSubmit = (e)=>{
 
 
 
+            
 
-{/* username  */}
-            {/* <FormGroup className="mb-3" >
-                <InputGroup className="input-group-alternative">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                    <i className="ni ni-hat-3" />
-                     
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input
-                   value={username}
-                    onChange={handleusername}
-                    placeholder="Username"
-                    type="text"
-                    autoComplete="new-username"
-                  />
-                </InputGroup>
-              </FormGroup> */}
 
-{/* email */}
               <FormGroup className="mb-3">
+              <lable>Email</lable>
+
                 <InputGroup className="input-group-alternative">
+
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
+                    
                       <i className="ni ni-email-83" />
                     </InputGroupText>
                   </InputGroupAddon>
+                  
                   <Input
                   value={email} 
                   onChange={handleEmail}
                     placeholder="Email"
                     type="email"
-                    autoComplete="new-email"
+                    autoComplete="off"
                   />
                 </InputGroup>
               </FormGroup>
@@ -204,6 +219,7 @@ const handleSubmit = (e)=>{
                   onChange={handlePassword}
                     placeholder="Password"
                     type="password"
+                    autoComplete="off"
                   // autoComplete="new-password"
                   />
                 </InputGroup>
@@ -221,18 +237,19 @@ const handleSubmit = (e)=>{
                   <span className="text-muted">Remember me</span>
                 </label>
               </div>
+
+
+
+      
+
               <div className="text-center">
-              
 
+                  <Button className="my-4" onClick={handleSubmit} color="primary"  type="button">
+                    Sign In
 
-                <button className="my-4" color="primary"
-                onClick={handleSubmit}
-                 type="button" >
-                  Sign in
-                </button>
-
-
-              </div>
+                  </Button>
+                  </div>
+                 
               <Link to="/auth/register" >Create new account</Link>
             </Form>
           </CardBody>
@@ -269,6 +286,15 @@ const handleSubmit = (e)=>{
       </Col>
     </>
   );
+};
+
+
+export const validateEmail = (email) => {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+  if (regex.test(email)) {
+    return true;
+  }
+  return false;
 };
 
 export default Login;

@@ -164,7 +164,7 @@ const Auth = (props) => {
                 <Col lg="5" md="6">
                   <h1 className="text-white">Welcome!</h1>
                   <p className="text-lead text-light">
-                    Use these awesome forms to login or create new account in
+                  unt in
                     your project for free.
                   </p>
                 </Col>

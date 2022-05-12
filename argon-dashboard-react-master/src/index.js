@@ -28,6 +28,7 @@ ReactDOM.render(
 
     <Switch>
 
+    {/* <Route exact path="/" component={Login} /> */}
     <Route exact path="/" component={Login} />
     <Route exact path="/registeruser" component={RegisterUser} />
    

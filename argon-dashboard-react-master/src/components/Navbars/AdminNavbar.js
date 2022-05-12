@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 // reactstrap components
 import {
   DropdownMenu,
@@ -35,6 +35,19 @@ import {
 } from "reactstrap";
 
 const AdminNavbar = (props) => {
+
+
+  let user=JSON.parse( localStorage.getItem('user-info'))
+  console.warn(user )
+  const history = useHistory();
+  
+  function logOut(){
+
+    localStorage.clear();
+    history.push('/auth/login')
+  }
+
+
   return (
     <>
       <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -98,10 +111,26 @@ const AdminNavbar = (props) => {
                   <span>Support</span>
                 </DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+
+
+
+                {/* new  */}
+                {/* {localStorage.getItem('user-info')? */}
+
+                <DropdownItem  title={ user && user.name }   >
                   <i className="ni ni-user-run" />
-                  <span>Logout</span>
+                  <span onClick={logOut} >Logout</span>
                 </DropdownItem>
+                 {/* :null */}
+                
+
+{/*  
+                <DropdownItem  title={ user && user.name } >
+                  <i className="ni ni-user-run" />
+                  <span onClick={logOut} >new</span>
+                </DropdownItem> */}
+
+
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>

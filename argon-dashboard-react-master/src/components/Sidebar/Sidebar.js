@@ -70,7 +70,9 @@ const Sidebar = (props) => {
   };
   // creates the links that appear in the left menu / Sidebar
   const createLinks = (routes) => {
+
     return routes.map((prop, key) => {
+      if(prop.layout!="/auth")
       return (
         <NavItem key={key}>
           <NavLink
@@ -258,14 +260,14 @@ const Sidebar = (props) => {
               </NavLink>
             </NavItem> */}
           </Nav>
-          <Nav className="mb-md-3" navbar>
+          {/* <Nav className="mb-md-3" navbar>
             <NavItem className="active-pro active">
               <NavLink href="https://www.creative-tim.com/product/argon-dashboard-pro-react?ref=adr-admin-sidebar">
                 <i className="ni ni-spaceship" />
                 Upgrade to PRO
               </NavLink>
             </NavItem>
-          </Nav>
+          </Nav> */}
         </Collapse>
       </Container>
     </Navbar>

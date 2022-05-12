@@ -215,7 +215,7 @@ import {
 
 
    console.log({name, email,password});   
-   const history = useHistory();
+  //  const history = useHistory();
 
 
    const handleName =(e)=>{
@@ -373,23 +373,23 @@ const handleSubmit = (e)=>{
                         id="customCheckRegister"
                         type="checkbox"
                       />
-                      <label
+                      {/* <label
                         className="custom-control-label"
                         htmlFor="customCheckRegister"
-                      >
-                        <span className="text-muted">
+                      > */}
+                        {/* <span className="text-muted">
                           I agree with the{" "}
                           <a href="#pablo" onClick={(e) => e.preventDefault()}>
                             Privacy Policy
                           </a>
-                        </span>
-                      </label>
+                        </span> */}
+                      {/* </label> */}
                     </div>
                   </Col>
                 </Row>
                 <div className="text-center">
 
-                  <Button className="mt-4" onChange={handleSubmit} color="primary"  type="button">
+                  <Button className="mt-4" onClick={handleSubmit} color="primary"  type="button">
                     Create account
                   </Button>
                 </div>

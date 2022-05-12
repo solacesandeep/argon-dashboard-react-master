@@ -75,7 +75,7 @@ const Home = () => {
             {
                 udata ?
                     <>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <div class="alert alert-success close fade show" role="alert">
                             <strong>{udata.name}</strong>  added succesfully!
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
